@@ -1,0 +1,35 @@
+version: "3.5"
+networks: 
+  mynetwork:
+    external:
+      name: yulius-workspace_mynetwork
+services:
+  app:
+    container_name: yulius-customer
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9011:9011"
+    volumes:
+      - .:/app
+    links:
+      - mongo
+      - redisntw
+    networks:
+      - mynetwork
+  mongo:
+    container_name: yulius-customer-mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - mynetwork
+  redisntw:
+    container_name: yulius-customer-redis
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - mynetwork
