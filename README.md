@@ -2,6 +2,7 @@
 Yulius API Customer
 
 create network yulius-workspace_mynetwork
+running docker-compose up --build
 
 TASK 2
 
